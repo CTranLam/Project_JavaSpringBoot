@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javaweb.customexception.FieldRequiredException;
 import com.javaweb.customexception.ValidNumException;
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingRequestDTO;
 import com.javaweb.model.ErrorResponseDTO;
 import com.javaweb.service.BuildingService;
 
@@ -30,10 +31,8 @@ public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
 	@PostMapping("/api/building/")
-	public List<BuildingDTO> getBuilding(@RequestParam(value = "name" ,required = false)String name,
-										@RequestParam(value = "districtId" ,required = false)Long district,
-										@RequestParam(value = "typeCode" ,required = false) List<String>typecode){
-		List<BuildingDTO> result = buildingService.findAll(name,district);
+	public List<BuildingDTO> getBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO){
+		List<BuildingDTO> result = buildingService.findAll(buildingRequestDTO);
 		return result;
 	}
 
